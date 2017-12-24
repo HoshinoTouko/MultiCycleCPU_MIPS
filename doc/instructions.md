@@ -14,9 +14,26 @@ MIPS-C2＝{LB、LBU、LH、LHU、LW、SB、SH、SW、ADD、ADDU、SUB、SUBU、S
 
 > ALL 6'b000000
 
-- LB、LBU、LH、LHU、LW、SB、SH、SW、ADD、ADDU、SUB、SUBU、SLL、SRL、SRA、SLLV、SRLV、SRAV、AND、OR、XOR、NOR、SLT、SLTU
+> $d = $s ALUOp $t; advance_pc (4);
+
+- ADD、ADDU、SUB、SUBU、SLL、SRL、SRA、SLLV、SRLV、SRAV、AND、OR、XOR、NOR、SLT、SLTU
 
 #### I-Type
+
+##### Memory
+
+| Instr     | Syntax            | Operation |
+| :---:     | :----:            | :-------: |
+| LB        | lb $t, offset($s) | $t = MEM[$s + offset]; advance_pc (4);|
+| LBU       | lbu $t, offset($s)| |
+| LH        | lh $t, offset($s) | |
+| LHU       | lhu $t, offset($s)| |
+| LW        | lw $t, offset($s) | $t = MEM[$s + offset]; advance_pc (4);|
+| SB        | sb $t, offset($s) | MEM[$s + offset] = (0xff & $t); advance_pc (4);|
+| SH        | sh $t, offset($s) | |
+| SW        | sw $t, offset($s) | MEM[$s + offset] = $t; advance_pc (4);|
+
+##### Imm calculate
 
 | Instr     | Syntax            | Operation |
 | :---:     | :----:            | :-------: |
