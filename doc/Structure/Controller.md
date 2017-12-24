@@ -123,7 +123,7 @@ PCWriteCond=0
 
 #### State 7 - Write Back (R-Type)
 
-- instr[15:11]
+- instr[15:11] <= ALUOut
 
 ```
 RegDst=1
