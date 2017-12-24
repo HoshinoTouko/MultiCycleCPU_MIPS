@@ -4,17 +4,15 @@
 
 In this file, all instruction's op will be defined to improve the program's readability.
 
-### Sort
-
-#### R-Type
+### R-Type
 
 > ALL 6'b000000
 
 - ADD、ADDU、SUB、SUBU、SLL、SRL、SRA、SLLV、SRLV、SRAV、AND、OR、XOR、NOR、SLT、SLTU
 
-#### I-Type
+### I-Type
 
-##### Memory
+#### Memory
 
 | Instr     | Op Code   | Syntax            | Operation |
 | :---:     | :-----:   | :----:            | :-------: |
@@ -27,7 +25,7 @@ In this file, all instruction's op will be defined to improve the program's read
 | SH        | ******    | sh $t, offset($s) | |
 | SW        | 101011    | sw $t, offset($s) | MEM[$s + offset] = $t; advance_pc (4);|
 
-##### Imm calculate
+#### Imm calculate
 
 | Instr     | Op Code   | Syntax            | Operation |
 | :---:     | :-----:   | :----:            | :-------: |
@@ -40,7 +38,7 @@ In this file, all instruction's op will be defined to improve the program's read
 | SLTI      | 001010    | slti $t, $s, imm  | if $s < imm $t = 1; advance_pc (4); else $t = 0; advance_pc (4);|
 | SLTIU         | 001011    | sltiu $t, $s, imm | if $s < imm $t = 1; advance_pc (4); else $t = 0; advance_pc (4);|
 
-#### Branch
+### Branch
 
 | Instr     | Op Code   | Syntax            | Operation |
 | :---:     | :-----:   | :----:            | :-------: |
@@ -51,7 +49,7 @@ In this file, all instruction's op will be defined to improve the program's read
 | BLTZ      | 000001    | bltz $s, offset   | if $s < 0 advance_pc (offset << 2)); else advance_pc (4);|
 | BGEZ      | 000001    | bgez $s, offset   | if $s >= 0 advance_pc (offset << 2)); else advance_pc (4);|
 
-#### J
+### J
 
 | Instr     | Op Code   | Syntax        | Operation |
 | :---:     | :-----:   | :----:        | :-------: |
@@ -59,3 +57,33 @@ In this file, all instruction's op will be defined to improve the program's read
 | JAL       | 000011    | jal target    | $31 = PC + 8 (or nPC + 4); PC = nPC; nPC = (PC & 0xf0000000) | (target << 2);|
 | JALR      | ******    | jalr target   | No Op |
 | JR        | 000000    | jr $s         | PC = nPC; nPC = $s;|
+
+## aluop_def.v
+
+If the instruction is unsigned, the last digit will be 1;
+
+### Classical funct
+
+| Instr     | Funct |
+| :---:     | :---: |
+| ADD       | 00000 |
+| ADDU      | 00001 |
+| SUB       | 00010 |
+| SUBU      | 00011 |
+| SLLV      | 00100 |
+| SRLV      | 00111 |
+| SRAV      | 00110 |
+| AND       | 01000 |
+| OR        | 01010 |
+| XOR       | 01100 |
+| NOR       | 01110 |
+| SLT       | 10000 |
+| SLTU      | 10001 |
+
+### Typical funct
+
+| Instr     | Funct |
+| :---:     | :---: |
+| SLL       | 10100 |
+| SRL       | 10111 |
+| SRA       | 10110 |
