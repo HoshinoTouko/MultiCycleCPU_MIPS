@@ -1,0 +1,46 @@
+# Folder *Define*
+
+## op_def.v
+
+In this file, all instruction's op will be defined to improve the program's readability.
+
+### Sort
+
+#### R-Type
+
+> ALL 6'b000000
+
+- LB、LBU、LH、LHU、LW、SB、SH、SW、ADD、ADDU、SUB、SUBU、SLL、SRL、SRA、SLLV、SRLV、SRAV、AND、OR、XOR、NOR、SLT、SLTU
+
+#### I-Type
+
+| Instruction   | Op Code   | Syntax            | Operation |
+| :---------:   | :-----:   | :----:            | :-------: |
+| ADDI          | 001000    | addi $t, $s, imm  | $t = $s + imm; advance_pc (4);|
+| ADDIU         | 001001    | addiu $t, $s, imm | $t = $s + imm; advance_pc (4);|
+| ANDI          | 001100    | andi $t, $s, imm  | $t = $s & imm; advance_pc (4);|
+| ORI           | 001101    | ori $t, $s, imm   | $t = $s | imm; advance_pc (4);|
+| XORI          | 001110    | xori $t, $s, imm  | $t = $s ^ imm; advance_pc (4);|
+| LUI           | 001111    | lui $t, imm       | $t = (imm << 16); advance_pc (4);|
+| SLTI          | 001010    | slti $t, $s, imm  | if $s < imm $t = 1; advance_pc (4); else $t = 0; advance_pc (4);|
+| SLTIU         | 001011    | sltiu $t, $s, imm | if $s < imm $t = 1; advance_pc (4); else $t = 0; advance_pc (4);|
+
+#### Branch
+
+| Instruction   | Op Code   | Syntax            | Operation |
+| :---------:   | :-----:   | :----:            | :-------: |
+| BEQ           | 000100    | beq $s, $t, offset| if $s == $t advance_pc (offset << 2)); else advance_pc (4);|
+| BNE           | 000101    | bne $s, $t, offset| if $s != $t advance_pc (offset << 2)); else advance_pc (4);|
+| BLEZ          | 000110    | blez $s, offset   | if $s <= 0 advance_pc (offset << 2)); else advance_pc (4);|
+| BGTZ          | 000111    | bgtz $s, offset   | if $s > 0 advance_pc (offset << 2)); else advance_pc (4);|
+| BLTZ          | 000001    | bltz $s, offset   | if $s < 0 advance_pc (offset << 2)); else advance_pc (4);|
+| BGEZ          | 000001    | bgez $s, offset   | if $s >= 0 advance_pc (offset << 2)); else advance_pc (4);|
+
+#### J
+
+| Instruction   | Op Code   | Syntax        | Operation |
+| :---------:   | :-----:   | :----:        | :-------: |
+| J             | 000010    | j target      | PC = nPC; nPC = (PC & 0xf0000000) | (target << 2);|
+| JAL           | 000011    | jal target    | $31 = PC + 8 (or nPC + 4); PC = nPC; nPC = (PC & 0xf0000000) | (target << 2);|
+| JALR          | ******    | jalr target   | No Op |
+| JR            | 000000    | jr $s         | PC = nPC; nPC = $s;|
