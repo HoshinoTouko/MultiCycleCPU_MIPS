@@ -1,11 +1,11 @@
 `include "src/main/Define/aluop_def.v"
 
 module alu(
-    input [31:0] srcA,
-    input [31:0] srcB,
-    input [1:0] ALUOp,
-    output reg Zero,
-    output reg[31:0] ALUResult
+    input   [31:0]  srcA,
+    input   [31:0]  srcB,
+    input   [1:0]   ALUOp,
+    output  Zero,
+    output  [31:0] ALUResult
 );
 
 initial

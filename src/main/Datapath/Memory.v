@@ -1,15 +1,15 @@
 module Memory(
     input   clk,
 
-    input	wire[11:2] Addr,
-    input	reg[31:0] WriteData,
+    input	[11:2]  Addr,
+    input	[31:0]  WriteData,
     input   MemRead,
     input   MemWrite,
 
-    output	reg[31:0] ReadData
+    output	[31:0]  ReadData
 );
 
-reg[31:0]	mainMemory[1023:0];
+reg[31:0]   mainMemory[1023:0];
 integer     fd, pointer;
 
 reg[31:0]   temp_instr;

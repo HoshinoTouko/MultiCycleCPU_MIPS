@@ -1,19 +1,19 @@
 module RF(
-    input clk,
-    input RegWrite, // Write data signal
+    input   clk,
+    input   RegWrite, // Write data signal
     
-    input [4:0]ReadAddr1, // Address of 1st. reg to read
-    input [4:0]ReadAddr2, // Address of 2nd. reg to read
+    input   [4:0]   ReadAddr1, // Address of 1st. reg to read
+    input   [4:0]   ReadAddr2, // Address of 2nd. reg to read
 
-    input [4:0]WriteAddr, // Address of 1st. reg to write
-    input [31:0]WriteData, // Write data
+    input   [4:0]   WriteAddr, // Address of 1st. reg to write
+    input   [31:0]  WriteData, // Write data
     
-    output [31:0]ReadData1, // Read data 1
-    output [31:0]ReadData2  // Read data 2
+    output  [31:0]  ReadData1, // Read data 1
+    output  [31:0]  ReadData2  // Read data 2
 );
 
-reg[31:0] register[31:0];
-integer i;
+reg[31:0]   register[31:0];
+integer     i;
 
 initial 
 begin
