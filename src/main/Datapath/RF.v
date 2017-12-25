@@ -1,7 +1,7 @@
 module RF(
     input   clk,
     input   RegWrite, // Write data signal
-    
+
     input   [4:0]   ReadAddr1, // Address of 1st. reg to read
     input   [4:0]   ReadAddr2, // Address of 2nd. reg to read
 

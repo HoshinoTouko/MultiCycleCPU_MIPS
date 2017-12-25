@@ -12,8 +12,8 @@
 `define ALUOP_NOR   5'01110
 `define ALUOP_SLT   5'10000
 `define ALUOP_SLTU  5'10001
-`define ALUOP_Instr 5'Funct
-`define ALUOP_:---: 5':---:
+
+// Special funct
 `define ALUOP_SLL   5'10100
 `define ALUOP_SRL   5'10111
 `define ALUOP_SRA   5'10110

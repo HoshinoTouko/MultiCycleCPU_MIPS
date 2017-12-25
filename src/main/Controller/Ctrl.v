@@ -64,6 +64,53 @@ module Ctrl(
             case (OP)
                 `OP_R:      State = 6;
                 default:    State = 0;
+            endcase
+        end
+
+        2： begin
+            // Reset some signals
+            // State 2: lw and sw
+            ALUSrcA=1
+            ALUSrcB=10
+            ALUOp=00
+            PCWriteCond=0
+            // Next State
+            case (OP)
+                `OP_LW:     State = 3;
+                `OP_SW:     State = 5;
+                default:    State = 0;
+            endcase
+        end
+
+        3: begin
+            // Reset some signals
+            // State 3: lw
+            MemRead     =   1;
+            IorD        =   1;
+            PCWriteCond =   0;
+            // Next State
+            State       =   4;
+        end
+
+        4: begin
+            // Reset some signals
+            // State 4: lw Write back
+            RegDst      =   0;
+            RegWrite    =   1;
+            MemtoReg    =   1;
+            PCWriteCond =   0;
+            // Next State
+            State       =   0;
+        end
+
+        5: begin
+            // Reset some signals
+            // State 5: sw
+            MemWrite    =   1;
+            IorD        =   1;
+            PCWriteCond =   0;
+            // Next State
+            State       =   0;
         end
 
         6:  begin
@@ -84,6 +131,28 @@ module Ctrl(
             RegWrite    =   1;
             Mem2Reg     =   0;
             PCWriteCond =   0;
+            // Next State
+            State       =   0;
+        end
+
+        8: begin
+            // Reset some signals
+            // State 8: R-Type
+            ALUSrcA     =   1;
+            ALUSrcB     =   2'b00;
+            ALUOp       =   2'b01;
+            PCSource    =   2'b01;
+            PCWriteCond =   1;
+            // Next State
+            State       =   0;
+        end
+
+        9: begin
+            // Reset some signals
+            PCWriteCond =   0;
+            // State 9: R-Type
+            PCSource    =   2'b10;
+            PCWrite     =   1;
             // Next State
             State       =   0;
         end

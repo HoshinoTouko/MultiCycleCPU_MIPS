@@ -36,7 +36,7 @@ In this file, all instruction's op will be defined to improve the program's read
 | XORI      | 001110    | xori $t, $s, imm  | $t = $s ^ imm; advance_pc (4);|
 | LUI       | 001111    | lui $t, imm       | $t = (imm << 16); advance_pc (4);|
 | SLTI      | 001010    | slti $t, $s, imm  | if $s < imm $t = 1; advance_pc (4); else $t = 0; advance_pc (4);|
-| SLTIU         | 001011    | sltiu $t, $s, imm | if $s < imm $t = 1; advance_pc (4); else $t = 0; advance_pc (4);|
+| SLTIU     | 001011    | sltiu $t, $s, imm | if $s < imm $t = 1; advance_pc (4); else $t = 0; advance_pc (4);|
 
 ### Branch
 
@@ -87,3 +87,14 @@ If the instruction is unsigned, the last digit will be 1;
 | SLL       | 10100 |
 | SRL       | 10111 |
 | SRA       | 10110 |
+
+## branchop_def.v
+
+| Instr     | BranchOp  |
+| :---:     | :------:  |
+| BEQ       | 000       |
+| BNE       | 001       |
+| BLEZ      | 010       |
+| BGTZ      | 011       |
+| BLTZ      | 100       |
+| BGEZ      | 101       |
