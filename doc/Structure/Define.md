@@ -80,7 +80,7 @@ If the instruction is unsigned, the last digit will be 1;
 | SLT       | 10000 |
 | SLTU      | 10001 |
 
-### Typical funct
+### Special funct
 
 | Instr     | Funct |
 | :---:     | :---: |
