@@ -3,7 +3,7 @@
 module alu(
     input   [31:0]  srcA,
     input   [31:0]  srcB,
-    input   [1:0]   ALUOp,
+    input   [4:0]   ALUOp,
     output  Zero,
     output  [31:0] ALUResult
 );

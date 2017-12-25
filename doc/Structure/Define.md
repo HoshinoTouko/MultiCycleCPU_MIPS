@@ -87,14 +87,3 @@ If the instruction is unsigned, the last digit will be 1;
 | SLL       | 10100 |
 | SRL       | 10111 |
 | SRA       | 10110 |
-
-## branchop_def.v
-
-| Instr     | BranchOp  |
-| :---:     | :------:  |
-| BEQ       | 000       |
-| BNE       | 001       |
-| BLEZ      | 010       |
-| BGTZ      | 011       |
-| BLTZ      | 100       |
-| BGEZ      | 101       |
