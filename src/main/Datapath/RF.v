@@ -12,25 +12,22 @@ module RF(
     output  [31:0]  ReadData2  // Read data 2
 );
 
-reg[31:0]   register[31:0];
-integer     i;
+    reg[31:0]   register[31:0];
+    integer     i;
 
-initial 
-begin
-    for(i = 0; i < 32; i = i + 1)
-        register[i] = 0;
-end
-
-always@(posedge clk)
-begin
-    if (WriteAddr != 0 && RegWrite) 
-    begin
-        register[WriteAddr] = WriteData[31:0];
-        $display("RF Write: %x to %d", WriteData[31:0], WriteAddr);
+    initial begin
+        for(i = 0; i < 32; i = i + 1)
+            register[i] = 0;
     end
-end
 
-assign ReadData1 = register[ReadAddr1];
-assign ReadData2 = register[ReadAddr2];
+    always@(posedge clk) begin
+        if (WriteAddr != 0 && RegWrite) begin
+            register[WriteAddr] = WriteData[31:0];
+            $display("RF Write: %x to %d", WriteData[31:0], WriteAddr);
+        end
+    end
+
+    assign ReadData1 = register[ReadAddr1];
+    assign ReadData2 = register[ReadAddr2];
 
 endmodule

@@ -33,7 +33,7 @@ module Ctrl(
     end
 
     always@(posedge clk) begin
-    
+
         case (State)
 
         0:  begin
