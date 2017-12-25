@@ -11,13 +11,12 @@ Multiple cycle CPU use states to control data flow
 - Read instruction from memory.
 - Write PC+4 back to PC.
 
-
 ```
 IorD = 0
 ALUSrcA = 0
 ALUSrcB = 01
 ALUOp = 00
-PCSource = 1
+PCSource = 00
 PCWrite = 1
 MemRead = 1
 IRWrite = 1

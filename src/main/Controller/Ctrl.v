@@ -7,6 +7,7 @@ module Ctrl(
     output          PCWriteCond,
     output          PCWrite,
     output  [1:0]   PCSource,
+    output          PCNext,
     
     // About Memory
     output          IorD,
@@ -38,11 +39,12 @@ module Ctrl(
 
         0:  begin
             // State 0
+            PCNext      =   1;
             IorD        =   0;
             ALUSrcA     =   2'b00;
             ALUSrcB     =   2'b01;
             ALUOp       =   2'b00;
-            PCSource    =   2'b01;
+            PCSource    =   2'b00;
             PCWrite     =   1;
             MemRead     =   1;
             IRWrite     =   1;
@@ -55,6 +57,7 @@ module Ctrl(
             PCWrite     =   0;
             MemRead     =   0;
             IRWrite     =   0;
+            PCNext      =   0;
             // State 1
             ALUSrcA     =   2'b00;
             ALUSrcB     =   2'b11;

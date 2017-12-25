@@ -13,6 +13,9 @@
         - 0 From ALU
         - 1 From ALUOut
         - 2 From Instr[25:0] << 2
+    - PCNext
+        - 0 PC do not output new data
+        - 1 PC output new data
 - About Memory
     - IorD
         - 0 From PC
