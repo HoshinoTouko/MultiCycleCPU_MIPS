@@ -52,6 +52,14 @@
         - 00 PC ADD 4
         - 01 Branch
         - 10 R-Type
+- About Branch Unit
+    - BranchOp
+        - 000 Equal
+        - 001 Not equal
+        - 010 Less than or equal to zero
+        - 011 Greater than zero
+        - 100 Less than zero
+        - 101 Greater than or equal to zero
 
 ## From ALU Control
 
