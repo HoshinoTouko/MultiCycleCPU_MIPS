@@ -2,15 +2,21 @@ module SReg(
     input   clk,
     input   RegWrite,
     input   [31:0]  Data,
+    // For PC
+    input           rst,
 
     output  [31:0]  Result
 );
 
     reg[31:0]       Reg;
 
-    always@(posedge clk) begin
+    always@(negedge clk) begin
         if (RegWrite)
             Reg = Data;
+    end
+
+    always@(posedge rst) begin
+        Reg <= {32'h00003000};
     end
 
     assign Result = Reg;

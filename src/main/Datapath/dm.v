@@ -1,12 +1,12 @@
-module Memory(
+module dm(
     input   clk,
 
-    input	[11:2]      Addr,
+    input	[11:2]      addr,
     input   [3:0]       BE, // Byte enable
-    input	[31:0]      WriteData,
-    input               MemWrite,
+    input	[31:0]      din,
+    input               DMWr,
 
-    output	reg[31:0]   ReadData
+    output	reg[31:0]   dout
 );
 
     reg[31:0]   mainMemory[1023:0];
@@ -16,12 +16,12 @@ module Memory(
 
     always @(posedge clk) begin
 
-        ReadData = mainMemory[Addr[11:2]][31:0];
-        $display("Mem get Addr: %x, ReadData: %b", Addr, ReadData);
+        dout = mainMemory[addr[11:2]][31:0];
+        $display("DM get addr: %x, dout: %b", addr, dout);
 
-        if (MemWrite) begin
-            mainMemory[Addr[11:2]][31:0] = WriteData;
-            $display("Mem set Addr: %x, ReadData: %b", Addr, WriteData);
+        if (DMWr) begin
+            mainMemory[addr[11:2]][31:0] = din;
+            $display("DM set addr: %x, dout: %b", addr, din);
         end
     end
 endmodule

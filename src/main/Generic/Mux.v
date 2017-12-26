@@ -9,7 +9,7 @@ module Mux(
     output  reg[31:0]   Result
 );
 
-    always@(Select) begin
+    always@(*) begin
         case(Select)
             2'b00:
                 Result = Data1;

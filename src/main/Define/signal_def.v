@@ -4,3 +4,4 @@
 
 `define ALUCTRL_ADD4    2'b00
 `define ALUCTRL_RTYPE   2'b10
+`define ALUCTRL_ITYPE   2'b11

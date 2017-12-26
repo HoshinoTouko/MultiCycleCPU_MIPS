@@ -1,6 +1,7 @@
+
 `include "src/main/Define/op_def.v"
 module Ctrl(
-    input clk,
+    input               clk,
 
     input   [5:0]       OP,
 
@@ -10,14 +11,13 @@ module Ctrl(
     output  reg[1:0]    PCSource,
     
     // About Memory
-    output  reg         IorD,
     output  reg         MemRead,
     output  reg         MemWrite,
     
     // About Register
-    output  reg         Mem2Reg,
+    output  reg[1:0]    Mem2Reg,
     output  reg         IRWrite,
-    output  reg         RegDst,
+    output  reg[1:0]    RegDst,
     output  reg         RegWrite,
     
     // About ALU
@@ -35,18 +35,28 @@ module Ctrl(
 
     always@(posedge clk) begin
 
+        $display("Current OP: %b", OP);
+        $display("Current state: %d", State);
+
         case (State)
 
         0:  begin
             // State 0
-            IorD        =   0;
+            PCWriteCond =   0;
+            PCWrite     =   1;
+            PCSource    =   2'b00;
+
+            MemWrite    =   0;
+
+            Mem2Reg     =   2'b00;
+            RegDst      =   2'b00;
+            IRWrite     =   1;
+            RegWrite    =   0;
+
             ALUSrcA     =   2'b00;
             ALUSrcB     =   2'b01;
             ALUCtrlOp   =   2'b00;
-            PCSource    =   2'b00;
-            PCWrite     =   1;
-            MemRead     =   1;
-            IRWrite     =   1;
+
             // Next State
             State       =   1;
         end
@@ -63,7 +73,19 @@ module Ctrl(
             PCWriteCond =   0;
             // Next State
             case (OP)
+                // R-Type
                 `OP_R:      State = 6;
+                // Immediate Type
+                `OP_ADDI, `OP_ADDIU, `OP_ANDI, `OP_ORI, `OP_XORI, `OP_LUI, `OP_SLTI, `OP_SLTIU:
+                            State = 10;
+                // Memory
+                `OP_LB, `OP_LBU, `OP_LH, `OP_LHU, `OP_LW, `OP_SB, `OP_SH, `OP_SW:
+                            State = 2;
+                // Branch
+                `OP_BEQ, `OP_BNE, `OP_BLEZ, `OP_BGTZ, `OP_BLTZ, `OP_BGEZ:
+                            State = 8;
+                `OP_J, `OP_JAL, `OP_JALR, `OP_JR:
+                            State = 9;
                 default:    State = 0;
             endcase
         end
@@ -71,10 +93,10 @@ module Ctrl(
         2:  begin
             // Reset some signals
             // State 2: lw and sw
-            ALUSrcA=1;
-            ALUSrcB=10;
-            ALUCtrlOp=00;
-            PCWriteCond=0;
+            ALUSrcA     =   1;
+            ALUSrcB     =   10;
+            ALUCtrlOp   =   00;
+            PCWriteCond =   0;
             // Next State
             case (OP)
                 `OP_LW:     State = 3;
@@ -87,7 +109,6 @@ module Ctrl(
             // Reset some signals
             // State 3: lw
             MemRead     =   1;
-            IorD        =   1;
             PCWriteCond =   0;
             // Next State
             State       =   4;
@@ -96,9 +117,9 @@ module Ctrl(
         4: begin
             // Reset some signals
             // State 4: lw Write back
-            RegDst      =   0;
+            RegDst      =   2'b00;
             RegWrite    =   1;
-            Mem2Reg    =   1;
+            Mem2Reg     =   2'b01;
             PCWriteCond =   0;
             // Next State
             State       =   0;
@@ -108,7 +129,6 @@ module Ctrl(
             // Reset some signals
             // State 5: sw
             MemWrite    =   1;
-            IorD        =   1;
             PCWriteCond =   0;
             // Next State
             State       =   0;
@@ -117,8 +137,8 @@ module Ctrl(
         6:  begin
             // Reset some signals
             // State 6: R-Type
-            ALUSrcA     =   2'b01;
-            ALUSrcB     =   2'b00;
+            ALUSrcA         =   2'b01;
+            ALUSrcB         =   2'b00;
             ALUCtrlOp       =   2'b10;
             PCWriteCond =   0;
             // Next State
@@ -127,10 +147,10 @@ module Ctrl(
 
         7:  begin
             // Reset some signals
-            // State 7: R-Type
-            RegDst      =   1;
+            // State 7: R-Type / I-Type Write to Reg
+            RegDst      =   2'b01;
             RegWrite    =   1;
-            Mem2Reg     =   0;
+            Mem2Reg     =   2'b00;
             PCWriteCond =   0;
             // Next State
             State       =   0;
@@ -138,10 +158,10 @@ module Ctrl(
 
         8: begin
             // Reset some signals
-            // State 8: R-Type
+            // State 8: Branch
             ALUSrcA     =   1;
             ALUSrcB     =   2'b00;
-            ALUCtrlOp       =   2'b01;
+            ALUCtrlOp   =   2'b01;
             PCSource    =   2'b01;
             PCWriteCond =   1;
             // Next State
@@ -151,11 +171,21 @@ module Ctrl(
         9: begin
             // Reset some signals
             PCWriteCond =   0;
-            // State 9: R-Type
+            // State 9: Jump
             PCSource    =   2'b10;
             PCWrite     =   1;
             // Next State
             State       =   0;
+        end
+
+        10: begin
+            // Reset some signals
+            ALUSrcA         =   2'b01;
+            ALUSrcB         =   2'b10;
+            ALUCtrlOp       =   2'b11;
+            PCWriteCond =   0;
+            // Next State
+            State       =   7;
         end
 
         default: State  =   0;

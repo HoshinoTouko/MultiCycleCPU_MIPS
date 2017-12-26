@@ -1,3 +1,5 @@
+`include "src/main/Define/signal_def.v"
+
 module mips(
     input   clk,
     input   rst
@@ -22,9 +24,9 @@ module mips(
     wire    [31:0]  DataDMRead;
     wire    [31:0]  DataDMReadReg;
     // RF
-    wire    [4:0]  DataRFRead1;
-    wire    [4:0]  DataRFRead2;
-    wire    [4:0]  DataRFWriteAddr;
+    wire    [31:0]  DataRFRead1;
+    wire    [31:0]  DataRFRead2;
+    wire    [4:0]   DataRFWriteAddr;
     wire    [31:0]  DataRFWriteData;
     // Sign Extend
     wire    [31:0]  DataSignExt;
@@ -45,9 +47,9 @@ module mips(
     wire            SignalMemRead;
     wire            SignalMemWrite;
     // About Register
-    wire            SignalMem2Reg;
+    wire    [1:0]   SignalMem2Reg;
     wire            SignalIRWrite;
-    wire            SignalRegDst;
+    wire    [1:0]   SignalRegDst;
     wire            SignalRegWrite;
     // About ALU
     wire    [1:0]   SignalALUSrcA;
@@ -68,23 +70,54 @@ module mips(
     SReg PCSReg(
         .clk(clk),
         .RegWrite(SignalPCWriteResult),
-
         .Data(DataNextPC),
+        .rst(rst),
+
         .Result(DataPCReg)
     );
+    // Ctrl
+    Ctrl ctrl(
+        .clk(clk),
+        .OP(Instr[31:26]),
+        // Output
+        // PC
+        .PCWriteCond(SignalPCWriteCond),
+        .PCWrite(SignalPCWrite),
+        .PCSource(SignalPCSource),
+        // DM
+        .MemWrite(SignalMemWrite),
+        // Reg
+        .Mem2Reg(SignalMem2Reg),
+        .IRWrite(SignalIRWrite),
+        .RegDst(SignalRegDst),
+        .RegWrite(SignalRegWrite),
+        // ALU
+        .ALUSrcA(SignalALUSrcA),
+        .ALUSrcB(SignalALUSrcB),
+        .ALUCtrlOp(SignalALUCtrlOp)
+    );
     // IM
+    assign Instr = DataIMRegOutput;
     im IM(
+        .clk(clk),
         .addr(DataPCReg[11:2]),
         .dout(DataIMOutput)
+    );
+    SReg IMSreg(
+        .clk(clk),
+        .RegWrite(1),
+        .Data(DataIMOutput),
+
+        .Result(DataIMRegOutput)
     );
     // DM
     dm DM(
         .clk(clk),
         .addr(DataALUOutReg),
-        .write_data(DataRFRead2),
-        .MemWrite(SignalMemWrite),
+        .din(DataRFRead2),
+        .DMWr(SignalMemWrite),
         // Output
-        .read_data(DataDMRead)
+        .dout(DataDMRead)
     );
     SReg DMReg(
         .clk(clk),
@@ -101,6 +134,11 @@ module mips(
         .Data2(DataRFRead1),
         // Output
         .Result(DataALUSrcA)
+    );
+    EXT ext(
+        .Immediate16(Instr[15:0]),
+        .EXTOp(`EXTOP_SIGNED),
+        .Immediate32(DataSignExt)
     );
     Mux ALUSrcBMux(
         // Input
@@ -123,9 +161,9 @@ module mips(
     );
     Mux RFWriteData(
         // Input
-        .Select(DataDMReadReg),
+        .Select(SignalMem2Reg),
         .Data1(DataALUOutReg),
-        .Data2(Instr[15:11]),
+        .Data2(DataDMReadReg),
         // Output
         .Result(DataRFWriteData)
     );
@@ -143,6 +181,7 @@ module mips(
     );
     // ALU and ALUCtrl
     ALUCtrl ALUCtrl(
+        .OP(Instr[31:25]),
         .funct(Instr[5:0]),
         .ALUCtrlOp(SignalALUCtrlOp),
         // Output
@@ -168,7 +207,9 @@ module mips(
         .Select(SignalPCSource),
         .Data1(DataALUOut),
         .Data2(DataALUOutReg),
-        .Data3({DataPCReg[31:28], Instr[25:0], 2'b00})
+        .Data3({DataPCReg[31:28], Instr[25:0], 2'b00}),
+        // Output
+        .Result(DataNextPC)
     );
     // Branch
     Branch branch(
@@ -182,6 +223,8 @@ module mips(
 
     always @(clk) begin
         if (!clk) begin
+            $display("Instr: %b", Instr);
+            $display("DataRFWriteData: %x; DataRFWriteAddr: %x", DataRFWriteData, DataRFWriteAddr);
             $stop;
         end
     end

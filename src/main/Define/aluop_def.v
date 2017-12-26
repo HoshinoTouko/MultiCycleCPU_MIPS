@@ -13,8 +13,8 @@
 `define ALUOP_SLT   6'b101010
 `define ALUOP_SLTU  6'b101001
 // Special funct
-`define ALUOP_Instr 6'bFunct 
-`define ALUOP_:---: 6'b:---: 
 `define ALUOP_SLL   6'b000000
 `define ALUOP_SRL   6'b000010
 `define ALUOP_SRA   6'b000011
+// LUI
+`define ALUOP_LUI   6'b110000

@@ -56,6 +56,7 @@
         - 00 PC ADD 4
         - 01 Branch
         - 10 R-Type
+        - 11 I-Type
 - About Branch Unit
     - BranchOp
         - 000 Equal

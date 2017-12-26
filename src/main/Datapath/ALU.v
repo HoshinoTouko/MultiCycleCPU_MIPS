@@ -1,6 +1,6 @@
 `include "src/main/Define/aluop_def.v"
 
-module alu(
+module ALU(
     input   [31:0]      SrcA,
     input   [31:0]      SrcB,
     input   [5:0]       ALUOp,
@@ -40,9 +40,11 @@ module alu(
             `ALUOP_SRL  :   ALUResult = SrcA + SrcB;
             `ALUOP_SRA  :   ALUResult = SrcA + SrcB;
 
+            `ALUOP_LUI  :   ALUResult = SrcB << 16;
+
             default: ALUResult = 32'b0;
         endcase
-
+        $display("ALU A:%x, B:%x, Calculate %x", SrcA, SrcB, ALUResult);
     end
 
 endmodule
