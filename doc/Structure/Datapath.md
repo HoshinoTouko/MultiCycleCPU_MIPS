@@ -42,3 +42,5 @@
 #### OUT
 
 - ReadData[31:0]
+
+> TODO: Split Memory and add SignExt

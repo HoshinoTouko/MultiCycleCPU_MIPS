@@ -1,6 +1,6 @@
 module im(
-    input	[11:2]  addr,
-    output	[31:0]  dout
+    input	[11:2]      addr,
+    output	reg[31:0]   dout
 );
 
     reg     [31:0]	instrMem[1023:0];

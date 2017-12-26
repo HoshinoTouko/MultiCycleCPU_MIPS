@@ -60,30 +60,40 @@ In this file, all instruction's op will be defined to improve the program's read
 
 ## aluop_def.v
 
-If the instruction is unsigned, the last digit will be 1;
+http://www2.engr.arizona.edu/~ece369/Resources/spim/MIPSReference.pdf
 
 ### Classical funct
 
-| Instr     | Funct |
-| :---:     | :---: |
-| ADD       | 00000 |
-| ADDU      | 00001 |
-| SUB       | 00010 |
-| SUBU      | 00011 |
-| SLLV      | 00100 |
-| SRLV      | 00111 |
-| SRAV      | 00110 |
-| AND       | 01000 |
-| OR        | 01010 |
-| XOR       | 01100 |
-| NOR       | 01110 |
-| SLT       | 10000 |
-| SLTU      | 10001 |
+| Instr     | Funct  |
+| :---:     | :---:  |
+| ADD       | 100000 |
+| ADDU      | 100001 |
+| SUB       | 100010 |
+| SUBU      | 100011 |
+| SLLV      | 000100 |
+| SRLV      | 000110 |
+| SRAV      | 000111 |
+| AND       | 100100 |
+| OR        | 100101 |
+| XOR       | 100110 |
+| NOR       | 100111 |
+| SLT       | 101010 |
+| SLTU      | 101001 |
 
 ### Special funct
 
-| Instr     | Funct |
-| :---:     | :---: |
-| SLL       | 10100 |
-| SRL       | 10111 |
-| SRA       | 10110 |
+| Instr     | Funct  |
+| :---:     | :---:  |
+| SLL       | 000000 |
+| SRL       | 000010 |
+| SRA       | 000011 |
+
+## signal_def.v
+
+| SignalName        | Code  |
+| :--------:        | :--:  |
+| EXTOP_UNSIGNED    | 00    |
+| EXTOP_SIGNED      | 01    |
+| EXTOP_INST        | 10    |
+
+

@@ -1,8 +1,8 @@
-`include "src/main/Define/ctrl_encode_def.v"
+`include "src/main/Define/signal_def.v"
 module EXT(
-    input   [15:0]  Immediate16,
-    input   [1:0]   EXTOp,
-    output  [31:0]  Immediate32
+    input   [15:0]      Immediate16,
+    input   [1:0]       EXTOp,
+    output  reg[31:0]   Immediate32
 );
 
     initial begin

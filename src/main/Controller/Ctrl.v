@@ -1,31 +1,31 @@
+`include "src/main/Define/op_def.v"
 module Ctrl(
     input clk,
 
-    input   [5:0]   OP,
+    input   [5:0]       OP,
 
     // About PC Write
-    output          PCWriteCond,
-    output          PCWrite,
-    output  [1:0]   PCSource,
-    output          PCNext,
+    output  reg         PCWriteCond,
+    output  reg         PCWrite,
+    output  reg[1:0]    PCSource,
     
     // About Memory
-    output          IorD,
-    output          MemRead,
-    output          MemWrite,
+    output  reg         IorD,
+    output  reg         MemRead,
+    output  reg         MemWrite,
     
     // About Register
-    output          Mem2Reg,
-    output          IRWrite,
-    output          RegDst,
-    output          RegWrite,
+    output  reg         Mem2Reg,
+    output  reg         IRWrite,
+    output  reg         RegDst,
+    output  reg         RegWrite,
     
     // About ALU
-    output  [1:0]   ALUSrcA,
-    output  [1:0]   ALUSrcB,
+    output  reg[1:0]    ALUSrcA,
+    output  reg[1:0]    ALUSrcB,
     
     // About ALUControl
-    output  [1:0]   ALUCtrlOp
+    output  reg[1:0]    ALUCtrlOp
 );
     integer State;
 
@@ -39,11 +39,10 @@ module Ctrl(
 
         0:  begin
             // State 0
-            PCNext      =   1;
             IorD        =   0;
             ALUSrcA     =   2'b00;
             ALUSrcB     =   2'b01;
-            ALUOp       =   2'b00;
+            ALUCtrlOp   =   2'b00;
             PCSource    =   2'b00;
             PCWrite     =   1;
             MemRead     =   1;
@@ -57,11 +56,10 @@ module Ctrl(
             PCWrite     =   0;
             MemRead     =   0;
             IRWrite     =   0;
-            PCNext      =   0;
             // State 1
             ALUSrcA     =   2'b00;
             ALUSrcB     =   2'b11;
-            ALUOp       =   2'b00;
+            ALUCtrlOp       =   2'b00;
             PCWriteCond =   0;
             // Next State
             case (OP)
@@ -70,13 +68,13 @@ module Ctrl(
             endcase
         end
 
-        2： begin
+        2:  begin
             // Reset some signals
             // State 2: lw and sw
-            ALUSrcA=1
-            ALUSrcB=10
-            ALUOp=00
-            PCWriteCond=0
+            ALUSrcA=1;
+            ALUSrcB=10;
+            ALUCtrlOp=00;
+            PCWriteCond=0;
             // Next State
             case (OP)
                 `OP_LW:     State = 3;
@@ -100,7 +98,7 @@ module Ctrl(
             // State 4: lw Write back
             RegDst      =   0;
             RegWrite    =   1;
-            MemtoReg    =   1;
+            Mem2Reg    =   1;
             PCWriteCond =   0;
             // Next State
             State       =   0;
@@ -121,7 +119,7 @@ module Ctrl(
             // State 6: R-Type
             ALUSrcA     =   2'b01;
             ALUSrcB     =   2'b00;
-            ALUOp       =   2'b10;
+            ALUCtrlOp       =   2'b10;
             PCWriteCond =   0;
             // Next State
             State       =   7;
@@ -143,7 +141,7 @@ module Ctrl(
             // State 8: R-Type
             ALUSrcA     =   1;
             ALUSrcB     =   2'b00;
-            ALUOp       =   2'b01;
+            ALUCtrlOp       =   2'b01;
             PCSource    =   2'b01;
             PCWriteCond =   1;
             // Next State
