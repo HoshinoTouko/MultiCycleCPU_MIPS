@@ -17,9 +17,10 @@
         - 0 PC do not output new data
         - 1 PC output new data
 - About Memory
-    - IorD
+    - <del>IorD (DISCARD)</del>
         - 0 From PC
         - 1 From ALUOut (Register write back to memory)
+    - BE (Byte enable)
     - MemRead
         - 0 Refuse memory read operation
         - 1 Allow memory read operation
@@ -63,6 +64,8 @@
         - 011 Greater than zero
         - 100 Less than zero
         - 101 Greater than or equal to zero
+- About SignExt
+    -
 
 ## From ALU Control
 
