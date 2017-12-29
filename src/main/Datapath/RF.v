@@ -20,12 +20,14 @@ module RF(
             register[i] = 0;
     end
 
-    always@(posedge clk) begin
+    always@(negedge clk) begin
+        $display("WriteAddr: %d, WriteData: %d, RegWrite: %d", WriteAddr, WriteData, RegWrite);
         if (WriteAddr != 0 && RegWrite) begin
             register[WriteAddr] = WriteData[31:0];
             $display("RF Write: %x to %d", WriteData[31:0], WriteAddr);
         end
 
+        $display("----------------------------------- RF Start ---------------------------------");
         for(i = 0; i < 32; i = i + 1)
             if (register[i] != 0) begin
                 $display("RF %d: %x", i, register[i]);

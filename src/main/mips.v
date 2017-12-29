@@ -105,7 +105,7 @@ module mips(
     );
     SReg IMSreg(
         .clk(clk),
-        .RegWrite(1),
+        .RegWrite(SignalIRWrite),
         .Data(DataIMOutput),
 
         .Result(DataIMRegOutput)
@@ -143,7 +143,7 @@ module mips(
     Mux ALUSrcBMux(
         // Input
         .Select(SignalALUSrcB),
-        .Data1(DataPCReg),
+        .Data1(DataRFRead2),
         .Data2(4),
         .Data3(DataSignExt),
         .Data4({DataSignExt[29:0], 2'b00}),

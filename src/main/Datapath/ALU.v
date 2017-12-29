@@ -40,11 +40,11 @@ module ALU(
             `ALUOP_SRL  :   ALUResult = SrcA + SrcB;
             `ALUOP_SRA  :   ALUResult = SrcA + SrcB;
 
-            `ALUOP_LUI  :   ALUResult = SrcB << 16;
+            `ALUOP_LUI  :   ALUResult = {SrcB[15:0], 16'b0};
 
             default: ALUResult = 32'b0;
         endcase
-        $display("ALU A:%x, B:%x, Calculate %x", SrcA, SrcB, ALUResult);
+        $display("ALUOp: %b, ALU A:%x, B:%x, Calculate %x", ALUOp, SrcA, SrcB, ALUResult);
     end
 
 endmodule

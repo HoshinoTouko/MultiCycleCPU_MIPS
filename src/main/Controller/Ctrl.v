@@ -1,4 +1,4 @@
-
+`include "src/main/Define/aluop_def.v"
 `include "src/main/Define/op_def.v"
 module Ctrl(
     input               clk,
@@ -56,21 +56,27 @@ module Ctrl(
             ALUSrcA     =   2'b00;
             ALUSrcB     =   2'b01;
             ALUCtrlOp   =   2'b00;
-
             // Next State
             State       =   1;
         end
 
         1:  begin
-            // Reset some signals
+            // Signals
+            PCWriteCond =   0;
             PCWrite     =   0;
-            MemRead     =   0;
+            PCSource    =   2'b00;
+
+            MemWrite    =   0;
+
+            Mem2Reg     =   2'b00;
+            RegDst      =   2'b00;
             IRWrite     =   0;
-            // State 1
+            RegWrite    =   0;
+
             ALUSrcA     =   2'b00;
             ALUSrcB     =   2'b11;
-            ALUCtrlOp       =   2'b00;
-            PCWriteCond =   0;
+            ALUCtrlOp   =   2'b00;
+            // Reset some signals
             // Next State
             case (OP)
                 // R-Type
@@ -90,13 +96,23 @@ module Ctrl(
             endcase
         end
 
+        // State 2: lw & sw
         2:  begin
-            // Reset some signals
-            // State 2: lw and sw
-            ALUSrcA     =   1;
-            ALUSrcB     =   10;
-            ALUCtrlOp   =   00;
+            // Signals
             PCWriteCond =   0;
+            PCWrite     =   0;
+            PCSource    =   2'b00;
+
+            MemWrite    =   0;
+
+            Mem2Reg     =   2'b00;
+            RegDst      =   2'b00;
+            IRWrite     =   0;
+            RegWrite    =   0;
+
+            ALUSrcA     =   2'b01;
+            ALUSrcB     =   2'b10;
+            ALUCtrlOp   =   2'b00;
             // Next State
             case (OP)
                 `OP_LW:     State = 3;
@@ -105,87 +121,193 @@ module Ctrl(
             endcase
         end
 
+        // State 3: lw
         3: begin
-            // Reset some signals
-            // State 3: lw
-            MemRead     =   1;
+            // Signals
             PCWriteCond =   0;
+            PCWrite     =   0;
+            PCSource    =   2'b00;
+
+            MemWrite    =   0;
+
+            Mem2Reg     =   2'b00;
+            RegDst      =   2'b00;
+            IRWrite     =   0;
+            RegWrite    =   0;
+
+            ALUSrcA     =   2'b01;
+            ALUSrcB     =   2'b10;
+            ALUCtrlOp   =   2'b00;
             // Next State
             State       =   4;
         end
 
+        // State 4: lw Write back
         4: begin
-            // Reset some signals
-            // State 4: lw Write back
-            RegDst      =   2'b00;
-            RegWrite    =   1;
+            // Signal
+            PCWriteCond =   0;
+            PCWrite     =   0;
+            PCSource    =   2'b00;
+
+            MemWrite    =   0;
+
             Mem2Reg     =   2'b01;
-            PCWriteCond =   0;
+            RegDst      =   2'b00;
+            IRWrite     =   0;
+            RegWrite    =   1;
+
+            ALUSrcA     =   2'b01;
+            ALUSrcB     =   2'b10;
+            ALUCtrlOp   =   2'b00;
             // Next State
             State       =   0;
         end
 
+        // State 5: sw write to reg
         5: begin
-            // Reset some signals
-            // State 5: sw
-            MemWrite    =   1;
+            // Signals
             PCWriteCond =   0;
+            PCWrite     =   0;
+            PCSource    =   2'b00;
+
+            MemWrite    =   1;
+
+            Mem2Reg     =   2'b00;
+            RegDst      =   2'b00;
+            IRWrite     =   0;
+            RegWrite    =   0;
+
+            ALUSrcA     =   2'b01;
+            ALUSrcB     =   2'b10;
+            ALUCtrlOp   =   2'b00;
             // Next State
             State       =   0;
         end
 
+        // State 6: R-Type execute
         6:  begin
-            // Reset some signals
-            // State 6: R-Type
-            ALUSrcA         =   2'b01;
-            ALUSrcB         =   2'b00;
-            ALUCtrlOp       =   2'b10;
+            // Signals
             PCWriteCond =   0;
+            PCWrite     =   0;
+            PCSource    =   2'b00;
+
+            MemWrite    =   1;
+
+            Mem2Reg     =   2'b00;
+            RegDst      =   2'b00;
+            IRWrite     =   0;
+            RegWrite    =   0;
+
+            ALUSrcA     =   2'b01;
+            ALUSrcB     =   2'b00;
+            ALUCtrlOp   =   2'b10;
             // Next State
             State       =   7;
         end
 
+        // State 7: R-Type Write to Reg
         7:  begin
-            // Reset some signals
-            // State 7: R-Type / I-Type Write to Reg
-            RegDst      =   2'b01;
-            RegWrite    =   1;
-            Mem2Reg     =   2'b00;
+            // Signals
             PCWriteCond =   0;
+            PCWrite     =   0;
+            PCSource    =   2'b00;
+
+            MemWrite    =   1;
+
+            Mem2Reg     =   2'b00;
+            RegDst      =   2'b01;
+            IRWrite     =   0;
+            RegWrite    =   1;
+
+            ALUSrcA     =   2'b01;
+            ALUSrcB     =   2'b00;
+            ALUCtrlOp   =   2'b10;
             // Next State
             State       =   0;
         end
 
+        // State 8: Branch execute
         8: begin
-            // Reset some signals
-            // State 8: Branch
-            ALUSrcA     =   1;
+            // Signals
+            PCWriteCond =   1;
+            PCWrite     =   0;
+            PCSource    =   2'b01;
+
+            MemWrite    =   1;
+
+            Mem2Reg     =   2'b00;
+            RegDst      =   2'b00;
+            IRWrite     =   0;
+            RegWrite    =   0;
+
+            ALUSrcA     =   2'b01;
             ALUSrcB     =   2'b00;
             ALUCtrlOp   =   2'b01;
-            PCSource    =   2'b01;
-            PCWriteCond =   1;
             // Next State
             State       =   0;
         end
 
+        // State 9: Jump
         9: begin
-            // Reset some signals
+            // Signals
             PCWriteCond =   0;
-            // State 9: Jump
-            PCSource    =   2'b10;
             PCWrite     =   1;
+            PCSource    =   2'b10;
+
+            MemWrite    =   0;
+
+            Mem2Reg     =   2'b00;
+            RegDst      =   2'b00;
+            IRWrite     =   0;
+            RegWrite    =   0;
+
+            ALUSrcA     =   2'b00;
+            ALUSrcB     =   2'b11;
+            ALUCtrlOp   =   2'b00;
             // Next State
             State       =   0;
         end
 
+        // State 10: I-Type
         10: begin
-            // Reset some signals
-            ALUSrcA         =   2'b01;
-            ALUSrcB         =   2'b10;
-            ALUCtrlOp       =   2'b11;
+            // Signals
             PCWriteCond =   0;
+            PCWrite     =   0;
+            PCSource    =   2'b00;
+
+            MemWrite    =   0;
+
+            Mem2Reg     =   2'b00;
+            RegDst      =   2'b00;
+            IRWrite     =   0;
+            RegWrite    =   0;
+
+            ALUSrcA     =   2'b01;
+            ALUSrcB     =   2'b10;
+            ALUCtrlOp   =   2'b11;
             // Next State
-            State       =   7;
+            State       =   11;
+        end
+
+        // State 11: I-Type Write to Reg
+        11:  begin
+            // Signals
+            PCWriteCond =   0;
+            PCWrite     =   0;
+            PCSource    =   2'b00;
+
+            MemWrite    =   1;
+
+            Mem2Reg     =   2'b00;
+            RegDst      =   2'b00;
+            IRWrite     =   0;
+            RegWrite    =   1;
+
+            ALUSrcA     =   2'b01;
+            ALUSrcB     =   2'b00;
+            ALUCtrlOp   =   2'b10;
+            // Next State
+            State       =   0;
         end
 
         default: State  =   0;
