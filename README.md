@@ -14,6 +14,8 @@ For a more convenient test, I split the full test .asm file into 2 subsets: (1 t
 
 **Signals at [doc/Signal.md](doc/Signal.md)**
 
+**States at [doc/State.md](doc/State.md)**
+
 ## Other tips
 
 The document was not fully updated during my developing, so it may not perfectly match my recent work. Take it easy, there were not too many changes.

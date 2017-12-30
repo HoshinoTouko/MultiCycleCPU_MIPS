@@ -315,7 +315,7 @@ module Ctrl(
             State       =   0;
         end
 
-        // State 10: I-Type
+        // State 10: I-Type Execute
         10: begin
             // Signals
             PCWriteCond =   0;
