@@ -22,7 +22,7 @@ module im(
 
     always @(posedge clk) begin
         dout = instrMem[addr[11:2]][31:0];
-        $display("IM get addr: %x, dout: %x<-%b", addr, dout, dout);
+        //$display("IM get addr: %x, dout: %x<-%b", addr, dout, dout);
     end
 
 endmodule

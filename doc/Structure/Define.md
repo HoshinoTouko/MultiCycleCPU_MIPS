@@ -17,12 +17,12 @@ In this file, all instruction's op will be defined to improve the program's read
 | Instr     | Op Code   | Syntax            | Operation |
 | :---:     | :-----:   | :----:            | :-------: |
 | LB        | 100000    | lb $t, offset($s) | $t = MEM[$s + offset]; advance_pc (4);|
-| LBU       | ******    | lbu $t, offset($s)| |
-| LH        | ******    | lh $t, offset($s) | |
-| LHU       | ******    | lhu $t, offset($s)| |
+| LBU       | 100100    | lbu $t, offset($s)| |
+| LH        | 100001    | lh $t, offset($s) | |
+| LHU       | 100101    | lhu $t, offset($s)| |
 | LW        | 100011    | lw $t, offset($s) | $t = MEM[$s + offset]; advance_pc (4);|
 | SB        | 101000    | sb $t, offset($s) | MEM[$s + offset] = (0xff & $t); advance_pc (4);|
-| SH        | ******    | sh $t, offset($s) | |
+| SH        | 101001    | sh $t, offset($s) | |
 | SW        | 101011    | sw $t, offset($s) | MEM[$s + offset] = $t; advance_pc (4);|
 
 #### Imm calculate

@@ -23,12 +23,14 @@ module mips(
     // DM
     wire    [31:0]  DataDMRead;
     wire    [31:0]  DataDMReadReg;
+    wire    [11:0]   DataDMFakeAddr;
     // RF
     wire    [31:0]  DataRFRead1;
     wire    [31:0]  DataRFRead2;
     wire    [4:0]   DataRFWriteAddr;
     wire    [31:0]  DataRFWriteData;
     // Sign Extend
+    wire    [1:0]   SignalEXTOp;
     wire    [31:0]  DataSignExt;
     wire    [31:0]  DataSignExtSL2;
 
@@ -43,9 +45,10 @@ module mips(
     wire    [1:0]   SignalPCSource;
     wire            SignalPCNext;
     // About Memory
-    wire    [3:0]   SignalBE;
     wire            SignalMemRead;
     wire            SignalMemWrite;
+    wire    [3:0]   SignalDMBE;
+    wire            SignalDMSigned;
     // About Register
     wire    [1:0]   SignalMem2Reg;
     wire            SignalIRWrite;
@@ -79,6 +82,7 @@ module mips(
     Ctrl ctrl(
         .clk(clk),
         .OP(Instr[31:26]),
+        .funct(Instr[5:0]),
         // Output
         // PC
         .PCWriteCond(SignalPCWriteCond),
@@ -111,11 +115,21 @@ module mips(
         .Result(DataIMRegOutput)
     );
     // DM
+    BECtrl BECtrl(
+        .OP(Instr[31:26]),
+        .addr(DataALUOutReg),
+        // Output
+        .BE(SignalDMBE),
+        .fakeAddr(DataDMFakeAddr),
+        .MemReadSigned(SignalDMSigned)
+    );
     dm DM(
         .clk(clk),
-        .addr(DataALUOutReg),
+        .addr(DataDMFakeAddr[11:2]),
         .din(DataRFRead2),
         .DMWr(SignalMemWrite),
+        .BE(SignalDMBE),
+        .MemReadSigned(SignalDMSigned),
         // Output
         .dout(DataDMRead)
     );
@@ -132,12 +146,13 @@ module mips(
         .Select(SignalALUSrcA),
         .Data1(DataPCReg),
         .Data2(DataRFRead1),
+        .Data3({27'b0, Instr[10:6]}),
         // Output
         .Result(DataALUSrcA)
     );
     EXT ext(
         .Immediate16(Instr[15:0]),
-        .EXTOp(`EXTOP_SIGNED),
+        .EXTOp(SignalEXTOp),
         .Immediate32(DataSignExt)
     );
     Mux ALUSrcBMux(
@@ -181,9 +196,10 @@ module mips(
     );
     // ALU and ALUCtrl
     ALUCtrl ALUCtrl(
-        .OP(Instr[31:25]),
+        .OP(Instr[31:26]),
         .funct(Instr[5:0]),
         .ALUCtrlOp(SignalALUCtrlOp),
+        .EXTOp(SignalEXTOp),
         // Output
         .ALUOp(SignalALUOp)
     );
@@ -224,8 +240,8 @@ module mips(
     always @(clk) begin
         if (!clk) begin
             $display("Instr: %b", Instr);
-            $display("DataRFWriteData: %x; DataRFWriteAddr: %x", DataRFWriteData, DataRFWriteAddr);
-            $stop;
+            //$display("DataDMFakeAddr: %b; DataDMdin: %x", DataDMFakeAddr, DataRFRead2);
+            //$stop;
         end
     end
 

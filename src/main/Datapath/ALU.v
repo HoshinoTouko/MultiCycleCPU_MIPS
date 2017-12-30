@@ -4,6 +4,7 @@ module ALU(
     input   [31:0]      SrcA,
     input   [31:0]      SrcB,
     input   [5:0]       ALUOp,
+
     output              Zero,
     output  reg[31:0]   ALUResult
 );
@@ -24,27 +25,27 @@ module ALU(
             `ALUOP_SUB  :   ALUResult = SrcA - SrcB;
             `ALUOP_SUBU :   ALUResult = SrcA - SrcB;
 
-            `ALUOP_SLLV :   ALUResult = SrcA << SrcB;
-            `ALUOP_SRLV :   ALUResult = SrcA >> SrcB;
-            `ALUOP_SRAV :   ALUResult = SrcA >> SrcB;
+            `ALUOP_SLLV :   ALUResult = SrcB << SrcA[4:0];
+            `ALUOP_SRLV :   ALUResult = SrcB >> SrcA[4:0];
+            `ALUOP_SRAV :   ALUResult = (SrcB >> SrcA[4:0]) | ({32{SrcB[31]}}<<(6'd32-{1'b0,SrcA[4:0]}));
 
             `ALUOP_AND  :   ALUResult = SrcA & SrcB;
             `ALUOP_OR   :   ALUResult = SrcA | SrcB;
             `ALUOP_XOR  :   ALUResult = SrcA ^ SrcB;
-            `ALUOP_NOR  :   ALUResult = SrcA |~SrcB;
+            `ALUOP_NOR  :   ALUResult = ~(SrcA | SrcB);
 
-            `ALUOP_SLT  :   ALUResult = (SrcA < SrcB) ? 1 : 0;
+            `ALUOP_SLT  :   ALUResult = ($signed(SrcA) < $signed(SrcB)) ? 1 : 0;
             `ALUOP_SLTU :   ALUResult = (SrcA < SrcB) ? 1 : 0;
 
-            `ALUOP_SLL  :   ALUResult = SrcA + SrcB;
-            `ALUOP_SRL  :   ALUResult = SrcA + SrcB;
-            `ALUOP_SRA  :   ALUResult = SrcA + SrcB;
+            `ALUOP_SLL  :   ALUResult = SrcB << SrcA[4:0];
+            `ALUOP_SRL  :   ALUResult = SrcB >> SrcA[4:0];
+            `ALUOP_SRA  :   ALUResult = (SrcB >> SrcA[4:0]) | ({32{SrcB[31]}}<<(6'd32-{1'b0,SrcA[4:0]}));
 
             `ALUOP_LUI  :   ALUResult = {SrcB[15:0], 16'b0};
 
             default: ALUResult = 32'b0;
         endcase
-        $display("ALUOp: %b, ALU A:%x, B:%x, Calculate %x", ALUOp, SrcA, SrcB, ALUResult);
+        //$display("ALUOp: %b, ALU A:%x, B:%x, Calculate %x", ALUOp, SrcA, SrcB, ALUResult);
     end
 
 endmodule

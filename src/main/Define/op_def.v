@@ -5,12 +5,12 @@
 // TODO: Fix LBU, LH, LHU, SH, JALR
     // Memory
 `define OP_LB   6'b100000
-`define OP_LBU  6'b000000
-`define OP_LH   6'b000000
-`define OP_LHU  6'b000000
+`define OP_LBU  6'b100100
+`define OP_LH   6'b100001
+`define OP_LHU  6'b100101
 `define OP_LW   6'b100011
 `define OP_SB   6'b101000
-`define OP_SH   6'b000000
+`define OP_SH   6'b101001
 `define OP_SW   6'b101011
 
     // Imm calculate

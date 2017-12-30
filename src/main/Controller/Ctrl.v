@@ -1,9 +1,11 @@
-`include "src/main/Define/aluop_def.v"
+`include "src/main/Define/signal_def.v"
 `include "src/main/Define/op_def.v"
+`include "src/main/Define/aluop_def.v"
 module Ctrl(
     input               clk,
 
     input   [5:0]       OP,
+    input   [5:0]       funct,
 
     // About PC Write
     output  reg         PCWriteCond,
@@ -35,7 +37,7 @@ module Ctrl(
 
     always@(posedge clk) begin
 
-        $display("Current OP: %b", OP);
+        // $display("Current OP: %b", OP);
         $display("Current state: %d", State);
 
         case (State)
@@ -55,9 +57,10 @@ module Ctrl(
 
             ALUSrcA     =   2'b00;
             ALUSrcB     =   2'b01;
-            ALUCtrlOp   =   2'b00;
+            ALUCtrlOp   =   `ALUCTRL_ADD;
             // Next State
             State       =   1;
+            $stop;
         end
 
         1:  begin
@@ -75,7 +78,7 @@ module Ctrl(
 
             ALUSrcA     =   2'b00;
             ALUSrcB     =   2'b11;
-            ALUCtrlOp   =   2'b00;
+            ALUCtrlOp   =   `ALUCTRL_ADD;
             // Reset some signals
             // Next State
             case (OP)
@@ -112,11 +115,13 @@ module Ctrl(
 
             ALUSrcA     =   2'b01;
             ALUSrcB     =   2'b10;
-            ALUCtrlOp   =   2'b00;
+            ALUCtrlOp   =   `ALUCTRL_ADD;
             // Next State
             case (OP)
-                `OP_LW:     State = 3;
-                `OP_SW:     State = 5;
+                `OP_LB, `OP_LBU, `OP_LH, `OP_LHU, `OP_LW:
+                    State = 3;
+                `OP_SB, `OP_SH, `OP_SW:
+                    State = 5;
                 default:    State = 0;
             endcase
         end
@@ -137,7 +142,7 @@ module Ctrl(
 
             ALUSrcA     =   2'b01;
             ALUSrcB     =   2'b10;
-            ALUCtrlOp   =   2'b00;
+            ALUCtrlOp   =   `ALUCTRL_ADD;
             // Next State
             State       =   4;
         end
@@ -158,12 +163,12 @@ module Ctrl(
 
             ALUSrcA     =   2'b01;
             ALUSrcB     =   2'b10;
-            ALUCtrlOp   =   2'b00;
+            ALUCtrlOp   =   `ALUCTRL_ADD;
             // Next State
             State       =   0;
         end
 
-        // State 5: sw write to reg
+        // State 5: sw write to mem
         5: begin
             // Signals
             PCWriteCond =   0;
@@ -179,7 +184,7 @@ module Ctrl(
 
             ALUSrcA     =   2'b01;
             ALUSrcB     =   2'b10;
-            ALUCtrlOp   =   2'b00;
+            ALUCtrlOp   =   `ALUCTRL_ADD;
             // Next State
             State       =   0;
         end
@@ -191,16 +196,21 @@ module Ctrl(
             PCWrite     =   0;
             PCSource    =   2'b00;
 
-            MemWrite    =   1;
+            MemWrite    =   0;
 
             Mem2Reg     =   2'b00;
             RegDst      =   2'b00;
             IRWrite     =   0;
             RegWrite    =   0;
 
-            ALUSrcA     =   2'b01;
+            case(funct)
+                `ALUOP_SLL, `ALUOP_SRL, `ALUOP_SRA:
+                    ALUSrcA     =   2'b10;
+                default:
+                    ALUSrcA     =   2'b01;
+            endcase
             ALUSrcB     =   2'b00;
-            ALUCtrlOp   =   2'b10;
+            ALUCtrlOp   =   `ALUCTRL_RTYPE;
             // Next State
             State       =   7;
         end
@@ -212,7 +222,7 @@ module Ctrl(
             PCWrite     =   0;
             PCSource    =   2'b00;
 
-            MemWrite    =   1;
+            MemWrite    =   0;
 
             Mem2Reg     =   2'b00;
             RegDst      =   2'b01;
@@ -221,7 +231,7 @@ module Ctrl(
 
             ALUSrcA     =   2'b01;
             ALUSrcB     =   2'b00;
-            ALUCtrlOp   =   2'b10;
+            ALUCtrlOp   =   `ALUCTRL_ADD;
             // Next State
             State       =   0;
         end
@@ -233,7 +243,7 @@ module Ctrl(
             PCWrite     =   0;
             PCSource    =   2'b01;
 
-            MemWrite    =   1;
+            MemWrite    =   0;
 
             Mem2Reg     =   2'b00;
             RegDst      =   2'b00;
@@ -242,7 +252,7 @@ module Ctrl(
 
             ALUSrcA     =   2'b01;
             ALUSrcB     =   2'b00;
-            ALUCtrlOp   =   2'b01;
+            ALUCtrlOp   =   `ALUCTRL_ADD;
             // Next State
             State       =   0;
         end
@@ -263,7 +273,7 @@ module Ctrl(
 
             ALUSrcA     =   2'b00;
             ALUSrcB     =   2'b11;
-            ALUCtrlOp   =   2'b00;
+            ALUCtrlOp   =   `ALUCTRL_ADD;
             // Next State
             State       =   0;
         end
@@ -284,7 +294,7 @@ module Ctrl(
 
             ALUSrcA     =   2'b01;
             ALUSrcB     =   2'b10;
-            ALUCtrlOp   =   2'b11;
+            ALUCtrlOp   =   `ALUCTRL_ITYPE;
             // Next State
             State       =   11;
         end
@@ -296,7 +306,7 @@ module Ctrl(
             PCWrite     =   0;
             PCSource    =   2'b00;
 
-            MemWrite    =   1;
+            MemWrite    =   0;
 
             Mem2Reg     =   2'b00;
             RegDst      =   2'b00;
@@ -305,7 +315,7 @@ module Ctrl(
 
             ALUSrcA     =   2'b01;
             ALUSrcB     =   2'b00;
-            ALUCtrlOp   =   2'b10;
+            ALUCtrlOp   =   `ALUCTRL_ADD;
             // Next State
             State       =   0;
         end
@@ -313,6 +323,7 @@ module Ctrl(
         default: State  =   0;
 
         endcase
+        //$display("ALUCtrlOp: %b", ALUCtrlOp);
     end
 
 endmodule
