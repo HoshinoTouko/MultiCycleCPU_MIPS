@@ -171,6 +171,7 @@ module mips(
         .Select(SignalRegDst),
         .Data1(Instr[20:16]),
         .Data2(Instr[15:11]),
+        .Data3(31),
         // Output
         .Result(DataRFWriteAddr)
     );
@@ -179,6 +180,7 @@ module mips(
         .Select(SignalMem2Reg),
         .Data1(DataALUOutReg),
         .Data2(DataDMReadReg),
+        .Data3(DataPCReg),
         // Output
         .Result(DataRFWriteData)
     );
@@ -224,11 +226,13 @@ module mips(
         .Data1(DataALUOut),
         .Data2(DataALUOutReg),
         .Data3({DataPCReg[31:28], Instr[25:0], 2'b00}),
+        .Data4(DataRFRead1),
         // Output
         .Result(DataNextPC)
     );
     // Branch
     Branch branch(
+        .clk(clk),
         .SrcA(DataRFRead1),
         .SrcB(DataRFRead2),
         .OP(Instr[31:26]),

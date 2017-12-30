@@ -2,7 +2,6 @@
 `define OP_R    6'b000000
 
 // I-Type
-// TODO: Fix LBU, LH, LHU, SH, JALR
     // Memory
 `define OP_LB   6'b100000
 `define OP_LBU  6'b100100
@@ -34,5 +33,4 @@
 // J
 `define OP_J    6'b000010
 `define OP_JAL  6'b000011
-`define OP_JALR 6'b000000
-`define OP_JR   6'b000000
+

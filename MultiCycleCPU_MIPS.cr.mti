@@ -8,6 +8,13 @@ Model Technology ModelSim SE vlog 10.1a Compiler 2012.02 Feb 22 2012
 Top level modules:
 	RF
 
+} {} {}} C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Controller/BECtrl.v {1 {vlog -work work -vopt C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Controller/BECtrl.v
+Model Technology ModelSim SE vlog 10.1a Compiler 2012.02 Feb 22 2012
+-- Compiling module BECtrl
+
+Top level modules:
+	BECtrl
+
 } {} {}} C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Define/op_def.v {1 {vlog -work work -vopt C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Define/op_def.v
 Model Technology ModelSim SE vlog 10.1a Compiler 2012.02 Feb 22 2012
 
@@ -20,6 +27,15 @@ Top level modules:
 
 } {} {}} C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Define/aluop_def.v {1 {vlog -work work -vopt C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Define/aluop_def.v
 Model Technology ModelSim SE vlog 10.1a Compiler 2012.02 Feb 22 2012
+
+} {} {}} C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Controller/ALUCtrl.v {2 {vlog -work work -vopt C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Controller/ALUCtrl.v
+Model Technology ModelSim SE vlog 10.1a Compiler 2012.02 Feb 22 2012
+-- Compiling module ALUCtrl
+** Warning: C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Controller/ALUCtrl.v(61): (vlog-2600) [RDGN] - Redundant digits in numeric literal.
+
+
+Top level modules:
+	ALUCtrl
 
 } {} {}} C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Datapath/im.v {1 {vlog -work work -vopt C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Datapath/im.v
 Model Technology ModelSim SE vlog 10.1a Compiler 2012.02 Feb 22 2012
@@ -72,11 +88,11 @@ Model Technology ModelSim SE vlog 10.1a Compiler 2012.02 Feb 22 2012
 Top level modules:
 	ALU
 
-} {} {}} C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/mips.v {1 {vlog -work work -vopt C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/mips.v
+} {} {}} C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Controller/Ctrl.v {1 {vlog -work work -vopt C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Controller/Ctrl.v
 Model Technology ModelSim SE vlog 10.1a Compiler 2012.02 Feb 22 2012
--- Compiling module mips
+-- Compiling module Ctrl
 
 Top level modules:
-	mips
+	Ctrl
 
 } {} {}}

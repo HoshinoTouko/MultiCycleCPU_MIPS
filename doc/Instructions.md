@@ -61,8 +61,8 @@ MIPS-C2＝{LB、LBU、LH、LHU、LW、SB、SH、SW、ADD、ADDU、SUB、SUBU、S
 
 | Instr     | Syntax        | Operation |
 | :---:     | :----:        | :-------: |
-| J         | j target      | PC = nPC; nPC = (PC & 0xf0000000) | (target << 2);|
-| JAL       | jal target    | $31 = PC + 8 (or nPC + 4); PC = nPC; nPC = (PC & 0xf0000000) | (target << 2);|
-| JALR      | jalr target   | No Op |
+| J         | j target      | PC = nPC; nPC = (PC & 0xf0000000) OR (target << 2);|
+| JAL       | jal target    | $31 = PC + 8 (or nPC + 4); PC = nPC; nPC = (PC & 0xf0000000) OR (target << 2);|
+| JALR      | jalr $s       | $31 = PC + 8 (or nPC + 4); PC = nPC; nPC = $s;|
 | JR        | jr $s         | PC = nPC; nPC = $s;|
 

@@ -83,7 +83,14 @@ module Ctrl(
             // Next State
             case (OP)
                 // R-Type
-                `OP_R:      State = 6;
+                `OP_R: begin
+                    case (funct)
+                        `JROP_JALR, `JROP_JR:
+                            State = 9;
+                        default:
+                            State = 6;
+                    endcase
+                end
                 // Immediate Type
                 `OP_ADDI, `OP_ADDIU, `OP_ANDI, `OP_ORI, `OP_XORI, `OP_LUI, `OP_SLTI, `OP_SLTIU:
                             State = 10;
@@ -93,7 +100,7 @@ module Ctrl(
                 // Branch
                 `OP_BEQ, `OP_BNE, `OP_BLEZ, `OP_BGTZ, `OP_BLTZ, `OP_BGEZ:
                             State = 8;
-                `OP_J, `OP_JAL, `OP_JALR, `OP_JR:
+                `OP_J, `OP_JAL:
                             State = 9;
                 default:    State = 0;
             endcase
@@ -257,19 +264,30 @@ module Ctrl(
             State       =   0;
         end
 
-        // State 9: Jump
+        // State 9: Jump / JR
         9: begin
             // Signals
             PCWriteCond =   0;
             PCWrite     =   1;
-            PCSource    =   2'b10;
+            case(OP)
+                `OP_J, `OP_JAL:
+                    PCSource    =   2'b10;
+                `OP_R:
+                    PCSource    =   2'b11;
+                default:
+                    PCSource    =   2'b10;
+            endcase
 
             MemWrite    =   0;
 
-            Mem2Reg     =   2'b00;
-            RegDst      =   2'b00;
+            Mem2Reg     =   2'b10;
+            RegDst      =   2'b10;
             IRWrite     =   0;
-            RegWrite    =   0;
+            //RegWrite    =   0;
+            if(OP == `OP_J || funct == `JROP_JR)
+                RegWrite    =   0;
+            else
+                RegWrite    =   1;
 
             ALUSrcA     =   2'b00;
             ALUSrcB     =   2'b11;

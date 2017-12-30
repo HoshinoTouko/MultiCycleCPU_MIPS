@@ -41,14 +41,14 @@ module dm(
                     MainMem[addr]           =   2'hffffffff;
             endcase
         end
-        /*
+
         $display("------------------------------- DM info -------------------------------");
         for (i = 0; i < 1024; i = i + 1) begin
             if(MainMem[i] != 0)
                 $display("DM %d: %x", i, MainMem[i]);
         end
         $display("------------------------------- DM fin -------------------------------");
-        */
+
     end
 
     always@(*) begin

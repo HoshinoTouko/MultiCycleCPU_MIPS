@@ -54,9 +54,9 @@ In this file, all instruction's op will be defined to improve the program's read
 | Instr     | Op Code   | Syntax        | Operation |
 | :---:     | :-----:   | :----:        | :-------: |
 | J         | 000010    | j target      | PC = nPC; nPC = (PC & 0xf0000000) | (target << 2);|
-| JAL       | 000011    | jal target    | $31 = PC + 8 (or nPC + 4); PC = nPC; nPC = (PC & 0xf0000000) | (target << 2);|
-| JALR      | ******    | jalr target   | No Op |
-| JR        | 000000    | jr $s         | PC = nPC; nPC = $s;|
+| JAL       | 000011    | jal target    | $31 = PC + 8 (or nPC + 4); PC = nPC; nPC = (PC & 0xf0000000) OR (target << 2);|
+| JALR(R)   | 000000    | jalr target   | $31 = PC + 8 (or nPC + 4); PC = nPC; nPC = $s;|
+| JR(R)     | 000000    | jr $s         | PC = nPC; nPC = $s;|
 
 ## aluop_def.v
 

@@ -18,3 +18,6 @@
 `define ALUOP_SRA   6'b000011
 // LUI
 `define ALUOP_LUI   6'b110000
+// JR
+`define JROP_JALR   6'b001001
+`define JROP_JR     6'b001000
