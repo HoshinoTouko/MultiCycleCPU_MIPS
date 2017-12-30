@@ -1,5 +1,7 @@
 # Folder *Controller*
 
+# !! This document need to be updated to fits the current change.
+
 ## States
 
 Multiple cycle CPU use states to control data flow
