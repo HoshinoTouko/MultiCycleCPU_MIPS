@@ -34,6 +34,10 @@ module ALU(
             `ALUOP_XOR  :   ALUResult = SrcA ^ SrcB;
             `ALUOP_NOR  :   ALUResult = ~(SrcA | SrcB);
 
+            `ALUOP_ANDI :   ALUResult = SrcA & SrcB[15:0];
+            `ALUOP_ORI  :   ALUResult = SrcA | SrcB[15:0];
+            `ALUOP_XORI :   ALUResult = SrcA ^ SrcB[15:0];
+
             `ALUOP_SLT  :   ALUResult = ($signed(SrcA) < $signed(SrcB)) ? 1 : 0;
             `ALUOP_SLTU :   ALUResult = (SrcA < SrcB) ? 1 : 0;
 

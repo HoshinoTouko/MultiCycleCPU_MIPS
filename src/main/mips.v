@@ -83,6 +83,7 @@ module mips(
         .clk(clk),
         .OP(Instr[31:26]),
         .funct(Instr[5:0]),
+        .PC(DataPCReg),
         // Output
         // PC
         .PCWriteCond(SignalPCWriteCond),
@@ -151,6 +152,7 @@ module mips(
         .Result(DataALUSrcA)
     );
     EXT ext(
+        .clk(clk),
         .Immediate16(Instr[15:0]),
         .EXTOp(SignalEXTOp),
         .Immediate32(DataSignExt)

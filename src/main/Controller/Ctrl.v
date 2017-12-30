@@ -7,6 +7,8 @@ module Ctrl(
     input   [5:0]       OP,
     input   [5:0]       funct,
 
+    input   [31:0]      PC,
+
     // About PC Write
     output  reg         PCWriteCond,
     output  reg         PCWrite,
@@ -30,15 +32,33 @@ module Ctrl(
     output  reg[1:0]    ALUCtrlOp
 );
     integer State;
+    integer fd;
 
     initial begin
         State = 0;
+        fd = $fopen("Results.txt","w");
     end
 
     always@(posedge clk) begin
 
         // $display("Current OP: %b", OP);
         $display("Current state: %d", State);
+        $fwrite(fd, "---------------------- PC:%x, State:%d -----------------------\n", PC, State);
+        $fwrite(fd, "PCWriteCond: %b   ", PCWriteCond);
+        $fwrite(fd, "PCWrite: %b   ", PCWrite);
+        $fwrite(fd, "PCSource: %b\n", PCSource);
+
+        $fwrite(fd, "MemWrite: %b\n", MemWrite);
+
+        $fwrite(fd, "Mem2Reg: %b   ", Mem2Reg);
+        $fwrite(fd, "IRWrite: %b   ", IRWrite);
+        $fwrite(fd, "RegDst: %b   ", RegDst);
+        $fwrite(fd, "RegWrite: %b\n", RegWrite);
+
+        $fwrite(fd, "ALUSrcA: %b   ", ALUSrcA);
+        $fwrite(fd, "ALUSrcB: %b   ", ALUSrcB);
+
+        $fwrite(fd, "ALUCtrlOp: %b\n", ALUCtrlOp);
 
         case (State)
 
@@ -60,7 +80,6 @@ module Ctrl(
             ALUCtrlOp   =   `ALUCTRL_ADD;
             // Next State
             State       =   1;
-            $stop;
         end
 
         1:  begin
@@ -248,7 +267,7 @@ module Ctrl(
             // Signals
             PCWriteCond =   1;
             PCWrite     =   0;
-            PCSource    =   2'b01;
+            PCSource    =   2'b00;
 
             MemWrite    =   0;
 
@@ -257,8 +276,8 @@ module Ctrl(
             IRWrite     =   0;
             RegWrite    =   0;
 
-            ALUSrcA     =   2'b01;
-            ALUSrcB     =   2'b00;
+            ALUSrcA     =   2'b00;
+            ALUSrcB     =   2'b11;
             ALUCtrlOp   =   `ALUCTRL_ADD;
             // Next State
             State       =   0;

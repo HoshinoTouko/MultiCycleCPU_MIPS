@@ -5,6 +5,7 @@ entity Ctrl is
         clk             : in     vl_logic;
         OP              : in     vl_logic_vector(5 downto 0);
         funct           : in     vl_logic_vector(5 downto 0);
+        PC              : in     vl_logic_vector(31 downto 0);
         PCWriteCond     : out    vl_logic;
         PCWrite         : out    vl_logic;
         PCSource        : out    vl_logic_vector(1 downto 0);

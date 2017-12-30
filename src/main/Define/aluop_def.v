@@ -21,3 +21,7 @@
 // JR
 `define JROP_JALR   6'b001001
 `define JROP_JR     6'b001000
+// I and & or & nor & xor
+`define ALUOP_ANDI  6'b110100
+`define ALUOP_ORI   6'b110101
+`define ALUOP_XORI  6'b110110

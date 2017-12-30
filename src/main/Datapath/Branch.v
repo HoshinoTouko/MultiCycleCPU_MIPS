@@ -27,6 +27,8 @@ module Branch(
             end
             default: BranchSucceed = 0;
         endcase
+        if(BranchSucceed)
+            $display("JUMPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     end
 
 endmodule

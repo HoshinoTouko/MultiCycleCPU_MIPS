@@ -36,15 +36,15 @@ module ALUCtrl(
                     end
                     `OP_ANDI:   begin
                         EXTOp   =   `EXTOP_UNSIGNED;
-                        ALUOp   =   `ALUOP_AND;
+                        ALUOp   =   `ALUOP_ANDI;
                     end
                     `OP_ORI:    begin
                         EXTOp   =   `EXTOP_UNSIGNED;
-                        ALUOp   =   `ALUOP_OR;
+                        ALUOp   =   `ALUOP_ORI;
                     end
                     `OP_XORI:   begin
                         EXTOp   =   `EXTOP_UNSIGNED;
-                        ALUOp   =   `ALUOP_XOR;
+                        ALUOp   =   `ALUOP_XORI;
                     end
                     `OP_LUI:    begin
                         EXTOp   =   `EXTOP_UNSIGNED;

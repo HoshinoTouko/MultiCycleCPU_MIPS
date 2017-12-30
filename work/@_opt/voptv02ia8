@@ -4,17 +4,17 @@ K3
 cModel Technology
 dC:\Projects\modeltech\monocycleCPU_2
 T_opt
-VeO1o:dR]U?L2MNK5IghZI2
+VKJMUN]4;2>YDQA8cbE<N_1
 04 3 4 work run fast 0
-=20-bc83852bb1f4-5a47b3cf-2ff-137c
+=3-bc83852bb1f4-5a47cb97-3bf-b34
 o-quiet -auto_acc_if_foreign -work work
 n@_opt
 OE;O;10.1a;51
 vALU
-I]aQDNjPM2RD]OWTmDjC?M2
+IQ`U>Fk7md>=YUXVGgEzKO3
 V@Pia53Mz;W0a<CzSFi6bl1
 Z0 dC:\Users\OranL\Desktop\University\ComputerOrganizationAndDesign\lab3\MultiCycleCPU_MIPS
-w1514605637
+w1514652924
 Z1 8C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Datapath/ALU.v
 Z2 FC:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Datapath/ALU.v
 L0 3
@@ -25,8 +25,8 @@ Z4 !s90 -reportprogress|300|-work|work|-vopt|C:/Users/OranL/Desktop/University/C
 Z5 o-work work -L mtiAvm -L mtiOvm -L mtiUvm -L mtiUPF
 n@a@l@u
 Z6 !s107 src/main/Define/aluop_def.v|C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Datapath/ALU.v|
-!s100 Q51F1U26Nd12Sk?9jZl<Y3
-!s108 1514648520.721000
+!s100 UbLk@8n^6azD>VmhN]6z@2
+!s108 1514654611.293000
 !i10b 1
 !s85 0
 valu
@@ -48,10 +48,10 @@ R6
 !i10b 1
 !s85 0
 vALUCtrl
-I>jZn46:d`JUUClHoklTOi2
+IaR6ChB84R^DY9Ne8YlYR90
 VoPDVTCe1@EA8gkG1:g7780
 R7
-w1514605715
+w1514652860
 8C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Controller/ALUCtrl.v
 FC:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Controller/ALUCtrl.v
 L0 5
@@ -60,9 +60,9 @@ r1
 31
 R5
 n@a@l@u@ctrl
-!s100 GDLH7dzNGBI`0L>nG63Jc2
+!s100 i59S:6a_8OY[FoF0@JFBT1
 !s90 -reportprogress|300|-work|work|-vopt|C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Controller/ALUCtrl.v|
-!s108 1514648521.487000
+!s108 1514654612.039000
 !s107 src/main/Define/op_def.v|src/main/Define/aluop_def.v|src/main/Define/signal_def.v|C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Controller/ALUCtrl.v|
 !i10b 1
 !s85 0
@@ -83,13 +83,13 @@ n@b@e@ctrl
 !s90 -reportprogress|300|-work|work|-vopt|C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Controller/BECtrl.v|
 !i10b 1
 !s85 0
-!s108 1514648522.846000
+!s108 1514654613.448000
 !s107 src/main/Define/op_def.v|C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Controller/BECtrl.v|
 vBranch
-I@1FEd6jScMCNF8o4S_5_L2
+IUd5?;@9h;AbDAV?@OmSLN0
 Vk6Wl8A814:g4fa^:FS3k02
 R7
-w1514619630
+w1514653210
 8C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Datapath/Branch.v
 FC:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Datapath/Branch.v
 L0 2
@@ -98,17 +98,17 @@ r1
 31
 R5
 n@branch
-!s100 WbPF0[0WFKkTDF:D8A^Xm3
+!s100 l><:B`M>]8Gi]NBGE0a3F2
 !s90 -reportprogress|300|-work|work|-vopt|C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Datapath/Branch.v|
-!s108 1514648521.310000
+!s108 1514654611.894000
 !s107 src/main/Define/op_def.v|C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Datapath/Branch.v|
 !i10b 1
 !s85 0
 vCtrl
-IR?jXQjQLLA@2VCO:;co5;2
-VAlohPnc59nJJeb`j5T@CK3
+Ig3h<@57b1FCT^L4:W?TSR2
+VHfLSQi>_e5fBcU4HP78TA0
 R7
-w1514648388
+w1514654596
 8C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Controller/Ctrl.v
 FC:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Controller/Ctrl.v
 L0 4
@@ -117,9 +117,9 @@ r1
 31
 R5
 n@ctrl
-!s100 oVK;KcS:LTJ>ZcWSH0`eY0
 !s90 -reportprogress|300|-work|work|-vopt|C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Controller/Ctrl.v|
-!s108 1514648521.686000
+!s100 7[XlhQ7V15d?>O7nY148D1
+!s108 1514654612.248000
 !s107 src/main/Define/aluop_def.v|src/main/Define/op_def.v|src/main/Define/signal_def.v|C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Controller/Ctrl.v|
 !i10b 1
 !s85 0
@@ -138,14 +138,14 @@ Z10 !s90 -reportprogress|300|-work|work|-vopt|C:/Users/OranL/Desktop/University/
 R5
 Z11 !s107 C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Datapath/dm.v|
 !s100 F9Y<92g@h`W70O_==0VT00
-!s108 1514648521.911000
+!s108 1514654612.521000
 !i10b 1
 !s85 0
 vEXT
-I<iJ?[`nz1]UAd^;4Ef2fO1
-V6WYZRICAcQ6;eJa3UMLni3
+I0W5OAgIhdnjJ^QJl<NNbW3
+VX1;J6SON@N8;2Q?jjbU^M3
 R7
-w1514605686
+w1514652622
 8C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Datapath/SignExt.v
 FC:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Datapath/SignExt.v
 L0 2
@@ -154,9 +154,9 @@ r1
 31
 R5
 n@e@x@t
-!s100 QDLdW0mdU:HimOZV5FJUj3
+!s100 YbY7B324okOP1aSmbzYf00
 !s90 -reportprogress|300|-work|work|-vopt|C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Datapath/SignExt.v|
-!s108 1514648522.263000
+!s108 1514654612.886000
 !s107 src/main/Define/signal_def.v|C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Datapath/SignExt.v|
 !i10b 1
 !s85 0
@@ -174,7 +174,7 @@ r1
 R5
 !s100 cR26SRH]z4D2S7dK^RPa=1
 !s90 -reportprogress|300|-work|work|-vopt|C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Datapath/im.v|
-!s108 1514648522.087000
+!s108 1514654612.700000
 !s107 C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Datapath/im.v|
 !i10b 1
 !s85 0
@@ -198,10 +198,10 @@ R11
 !i10b 1
 !s85 0
 vmips
-ILziAGzRkV4TOfH7D]YaVA3
+IN6YVek9kCn[IHGF?j0Fd51
 V^lO[ZOI0I1e8M8GJjI9B:3
 R7
-w1514646448
+w1514653988
 8C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/mips.v
 FC:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/mips.v
 L0 3
@@ -209,9 +209,9 @@ R3
 r1
 31
 R5
-!s100 6K1]:Qo_1J:koD7mWg=<10
+!s100 I_<a`D_XdS8:Uhh2;_XB:3
 !s90 -reportprogress|300|-work|work|-vopt|C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/mips.v|
-!s108 1514648522.530000
+!s108 1514654613.154000
 !s107 src/main/Define/signal_def.v|C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/mips.v|
 !i10b 1
 !s85 0
@@ -228,9 +228,9 @@ r1
 31
 R5
 n@mux
-!s90 -reportprogress|300|-work|work|-vopt|C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Generic/Mux.v|
 !s100 ]Gkn7b<<MQ=ojb;QVIYQG1
-!s108 1514648521.014000
+!s90 -reportprogress|300|-work|work|-vopt|C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Generic/Mux.v|
+!s108 1514654611.591000
 !s107 C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Generic/Mux.v|
 !i10b 1
 !s85 0
@@ -249,7 +249,7 @@ R5
 n@r@f
 !s100 >:8Tca1bZ0;3H_zhG1a6^2
 !s90 -reportprogress|300|-work|work|-vopt|C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Datapath/RF.v|
-!s108 1514648520.871000
+!s108 1514654611.445000
 !s107 C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Datapath/RF.v|
 !i10b 1
 !s85 0
@@ -267,7 +267,7 @@ r1
 R5
 !s100 G96NCY@kOLM7_[`]hckIj3
 !s90 -reportprogress|300|-work|work|-vopt|C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/run.v|
-!s108 1514648522.693000
+!s108 1514654613.304000
 !s107 C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/run.v|
 !i10b 1
 !s85 0
@@ -286,7 +286,7 @@ R5
 n@s@reg
 !s100 E[BdgNHCWVOA^jSa86;4Y1
 !s90 -reportprogress|300|-work|work|-vopt|C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Generic/SReg.v|
-!s108 1514648521.161000
+!s108 1514654611.751000
 !s107 C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Generic/SReg.v|
 !i10b 1
 !s85 0

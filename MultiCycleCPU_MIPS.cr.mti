@@ -81,6 +81,13 @@ Model Technology ModelSim SE vlog 10.1a Compiler 2012.02 Feb 22 2012
 Top level modules:
 	dm
 
+} {} {}} C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Controller/Ctrl.v {1 {vlog -work work -vopt C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Controller/Ctrl.v
+Model Technology ModelSim SE vlog 10.1a Compiler 2012.02 Feb 22 2012
+-- Compiling module Ctrl
+
+Top level modules:
+	Ctrl
+
 } {} {}} C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Datapath/ALU.v {1 {vlog -work work -vopt C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Datapath/ALU.v
 Model Technology ModelSim SE vlog 10.1a Compiler 2012.02 Feb 22 2012
 -- Compiling module ALU
@@ -88,11 +95,11 @@ Model Technology ModelSim SE vlog 10.1a Compiler 2012.02 Feb 22 2012
 Top level modules:
 	ALU
 
-} {} {}} C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Controller/Ctrl.v {1 {vlog -work work -vopt C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/Controller/Ctrl.v
+} {} {}} C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/mips.v {1 {vlog -work work -vopt C:/Users/OranL/Desktop/University/ComputerOrganizationAndDesign/lab3/MultiCycleCPU_MIPS/src/main/mips.v
 Model Technology ModelSim SE vlog 10.1a Compiler 2012.02 Feb 22 2012
--- Compiling module Ctrl
+-- Compiling module mips
 
 Top level modules:
-	Ctrl
+	mips
 
 } {} {}}
